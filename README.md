@@ -116,13 +116,6 @@ python ml/make_report.py           # rebuilds docs/CityCycle_Model_Report.pdf fr
 
 The terminal output has the model comparison (MAE, RMSE, R-squared), the two data traps, the demand drivers and the error for each hour of the day. Training takes under a minute on a laptop.
 
-### Deploy to Vercel
-
-1. Push the repo to GitHub and import it in Vercel.
-2. Set **Root Directory** to `web`.
-3. Add environment variable `OPENAI_API_KEY` (and optionally `OPENAI_MODEL`). Never commit keys; `.env*` files are git-ignored.
-4. Deploy. The what-if and forecast views need no key. Only the agents call OpenAI.
-
 ## Business benefits
 
 - Ops can pre-position bikes before the 8am and 5 to 6pm working-day peaks instead of reacting to empty docks.
