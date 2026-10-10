@@ -5,26 +5,36 @@ import type { ReactNode } from "react";
 import { icons } from "./icons";
 
 const NAV = [
-  { href: "/", label: "Forecast", icon: icons.forecast },
-  { href: "/ops", label: "Ops guidance", icon: icons.ops },
-  { href: "/whatif", label: "What-if", icon: icons.whatif },
-  { href: "/agent", label: "AI agents", icon: icons.agent },
-  { href: "/trucks", label: "Truck log", icon: icons.log },
+  { href: "/", label: "Forecast", short: "Forecast", icon: icons.forecast, page: "forecast" },
+  { href: "/ops", label: "Ops guidance", short: "Ops", icon: icons.ops, page: "ops" },
+  { href: "/whatif", label: "What-if", short: "What-if", icon: icons.whatif, page: "whatif" },
+  { href: "/agent", label: "AI agents", short: "Agents", icon: icons.agent, page: "agent" },
+  { href: "/trucks", label: "Truck log", short: "Trucks", icon: icons.log, page: "trucks" },
 ];
 
-export function Rail() {
+/** Page frame: brand, navigation, and the page's own color (set through data-page). */
+export function Chrome({ children }: { children: ReactNode }) {
   const path = usePathname();
+  const page = NAV.find((n) => n.href === path)?.page ?? "forecast";
   return (
-    <nav className="rail" aria-label="Main">
-      <span className="logo">{icons.logo}</span>
-      {NAV.map((n) => (
-        <Link key={n.href} href={n.href} aria-current={path === n.href ? "page" : undefined} aria-label={n.label}>
-          {n.icon}
-          <span className="tip">{n.label}</span>
+    <div className="app" data-page={page}>
+      <header className="site">
+        <Link href="/" className="brand" aria-label="CityCycle home">
+          {icons.brand}
+          <span>CityCycle</span>
         </Link>
-      ))}
-      <span className="spacer" />
-    </nav>
+        <nav aria-label="Main">
+          {NAV.map((n) => (
+            <Link key={n.href} href={n.href} data-page={n.page} aria-current={path === n.href ? "page" : undefined}>
+              {n.icon}
+              <span className="lbl-long">{n.label}</span>
+              <span className="lbl-short">{n.short}</span>
+            </Link>
+          ))}
+        </nav>
+      </header>
+      <main className="stage">{children}</main>
+    </div>
   );
 }
 
