@@ -1,0 +1,29 @@
+# secrets and local config
+.env
+.env.*
+!.env.example
+temp.env
+
+# dependencies and build output
+node_modules/
+.next/
+__pycache__/
+*.pyc
+mlruns/
+.vercel/
+
+# documents and reference material (not code)
+docs/
+instructions/
+ReadmeTS.txt
+UIExample.png
+*.docx
+*.pdf
+
+# duplicate dataset copies in the project root (the code reads data/raw/hour.csv)
+/hour.csv
+/day.csv
+data/raw/day.csv
+data/raw/ReadmeTS.txt
+*.log
+*.tsbuildinfo
